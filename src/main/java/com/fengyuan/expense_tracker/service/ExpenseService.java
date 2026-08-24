@@ -13,6 +13,19 @@ public class ExpenseService {
     private long nextId = 1;
 
     public Expense createExpense(Expense expense) {
+        if (expense.getAmount() <= 0) {
+            throw new IllegalArgumentException(
+                    "Amount must be greater than 0"
+            );
+        }
+
+        if (expense.getDescription() == null
+                || expense.getDescription().isBlank()) {
+            throw new IllegalArgumentException(
+                    "Description must not be blank"
+            );
+        }
+
         expense.setId(nextId);
         nextId++;
 
