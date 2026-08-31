@@ -6,6 +6,7 @@ out/
 !**/src/test/**/out/
 .kotlin
 target/
+/data/
 
 ### Eclipse ###
 .apt_generated

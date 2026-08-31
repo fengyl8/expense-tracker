@@ -36,6 +36,12 @@ On Windows, run the application from the project root:
 .\mvnw.cmd spring-boot:run
 ```
 
+On Unix or macOS, run:
+
+```bash
+./mvnw spring-boot:run
+```
+
 Alternatively, open the project in IntelliJ IDEA and run `ExpenseTrackerApplication.java`.
 
 The application runs at:
