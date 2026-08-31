@@ -43,6 +43,11 @@ public class ExpenseService {
         return expenseRepository.save(existingExpense);
     }
 
+    public void deleteExpense(Long id) {
+        Expense expense = getExpenseById(id);
+        expenseRepository.delete(expense);
+    }
+
     private void validateExpense(Expense expense) {
         if (expense.getAmount() <= 0) {
             throw new IllegalArgumentException(

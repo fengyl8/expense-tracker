@@ -2,6 +2,8 @@ package com.fengyuan.expense_tracker.controller;
 
 import com.fengyuan.expense_tracker.model.Expense;
 import com.fengyuan.expense_tracker.service.ExpenseService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,5 +45,11 @@ public class ExpenseController {
             @RequestBody Expense expense
     ) {
         return expenseService.updateExpense(id, expense);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteExpense(@PathVariable Long id) {
+        expenseService.deleteExpense(id);
+        return ResponseEntity.noContent().build();
     }
 }
