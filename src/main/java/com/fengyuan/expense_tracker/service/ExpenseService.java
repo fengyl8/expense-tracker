@@ -1,5 +1,6 @@
 package com.fengyuan.expense_tracker.service;
 
+import com.fengyuan.expense_tracker.exception.ExpenseNotFoundException;
 import com.fengyuan.expense_tracker.model.Expense;
 import com.fengyuan.expense_tracker.repository.ExpenseRepository;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,10 @@ public class ExpenseService {
 
     public List<Expense> getAllExpenses() {
         return expenseRepository.findAll();
+    }
+
+    public Expense getExpenseById(Long id) {
+        return expenseRepository.findById(id)
+                .orElseThrow(() -> new ExpenseNotFoundException(id));
     }
 }

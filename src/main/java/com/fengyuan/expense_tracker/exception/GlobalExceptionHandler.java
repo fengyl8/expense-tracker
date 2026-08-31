@@ -39,4 +39,18 @@ public class GlobalExceptionHandler {
                 .body(response);
     }
 
+    @ExceptionHandler(ExpenseNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleExpenseNotFound(
+            ExpenseNotFoundException exception
+    ) {
+        Map<String, String> response = Map.of(
+                "error",
+                exception.getMessage()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(response);
+    }
+
 }
