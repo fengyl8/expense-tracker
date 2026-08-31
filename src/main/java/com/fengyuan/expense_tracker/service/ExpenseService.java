@@ -17,6 +17,33 @@ public class ExpenseService {
     }
 
     public Expense createExpense(Expense expense) {
+        validateExpense(expense);
+
+        return expenseRepository.save(expense);
+    }
+
+    public List<Expense> getAllExpenses() {
+        return expenseRepository.findAll();
+    }
+
+    public Expense getExpenseById(Long id) {
+        return expenseRepository.findById(id)
+                .orElseThrow(() -> new ExpenseNotFoundException(id));
+    }
+
+    public Expense updateExpense(Long id, Expense updatedExpense) {
+        validateExpense(updatedExpense);
+
+        Expense existingExpense = getExpenseById(id);
+        existingExpense.setAmount(updatedExpense.getAmount());
+        existingExpense.setDescription(updatedExpense.getDescription());
+        existingExpense.setCategory(updatedExpense.getCategory());
+        existingExpense.setDate(updatedExpense.getDate());
+
+        return expenseRepository.save(existingExpense);
+    }
+
+    private void validateExpense(Expense expense) {
         if (expense.getAmount() <= 0) {
             throw new IllegalArgumentException(
                     "Amount must be greater than 0"
@@ -29,16 +56,5 @@ public class ExpenseService {
                     "Description must not be blank"
             );
         }
-
-        return expenseRepository.save(expense);
-    }
-
-    public List<Expense> getAllExpenses() {
-        return expenseRepository.findAll();
-    }
-
-    public Expense getExpenseById(Long id) {
-        return expenseRepository.findById(id)
-                .orElseThrow(() -> new ExpenseNotFoundException(id));
     }
 }
