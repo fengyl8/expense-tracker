@@ -2,6 +2,7 @@ package com.fengyuan.expense_tracker.controller;
 
 import com.fengyuan.expense_tracker.model.Expense;
 import com.fengyuan.expense_tracker.service.ExpenseService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,14 @@ public class ExpenseController {
     }
 
     @PostMapping
-    public Expense createExpense(@RequestBody Expense expense) {
-        return expenseService.createExpense(expense);
+    public ResponseEntity<Expense> createExpense(
+            @RequestBody Expense expense
+    ) {
+        Expense createdExpense = expenseService.createExpense(expense);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(createdExpense);
     }
 
     @GetMapping
