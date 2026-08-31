@@ -20,9 +20,9 @@ From the project root, compile the program with `javac -d out src/Expense.java s
 Then run it with `java -cp out Main`.
 Alternatively, open the project in IntelliJ IDEA and run `Main.java`.
 
-## Week 2 Spring Boot API
+## Spring Boot Expense API
 
-The Week 2 project provides a REST API for creating and listing expenses. Data is stored in memory and is cleared when the application stops.
+Week 2 introduced the create and list endpoints. Week 3 adds full CRUD operations and stores expenses in a file-based H2 database, so data remains after the application restarts.
 
 ### Requirements
 
@@ -56,6 +56,9 @@ http://localhost:8080
 - `GET /api/hello?name=Fengyuan` — return a greeting
 - `POST /api/expenses` — create an expense
 - `GET /api/expenses` — list all expenses
+- `GET /api/expenses/{id}` — get an expense by ID
+- `PUT /api/expenses/{id}` — update an expense
+- `DELETE /api/expenses/{id}` — delete an expense
 
 ### Example Create Request
 
@@ -72,3 +75,4 @@ Content-Type: application/json
 ```
 
 More request and response examples are available in [`docs/api-examples.md`](docs/api-examples.md).
+The application request flow is explained in [`docs/request-flow.md`](docs/request-flow.md).

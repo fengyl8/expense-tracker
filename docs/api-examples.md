@@ -32,6 +32,8 @@ Example response:
 
 ## Create an Expense
 
+A successful request returns HTTP 201.
+
 ```http
 POST http://localhost:8080/api/expenses
 Content-Type: application/json
@@ -74,6 +76,48 @@ Example response:
     "date": "2026-08-17"
   }
 ]
+```
+
+## Get an Expense by ID
+
+```http
+GET http://localhost:8080/api/expenses/1
+```
+
+## Update an Expense
+
+```http
+PUT http://localhost:8080/api/expenses/1
+Content-Type: application/json
+
+{
+  "amount": 20.00,
+  "description": "Dinner",
+  "category": "Food",
+  "date": "2026-08-30"
+}
+```
+
+## Delete an Expense
+
+```http
+DELETE http://localhost:8080/api/expenses/1
+```
+
+A successful deletion returns HTTP 204 with an empty body.
+
+## Expense Not Found
+
+```http
+GET http://localhost:8080/api/expenses/999
+```
+
+Example response with HTTP 404:
+
+```json
+{
+  "error": "Expense not found with id: 999"
+}
 ```
 
 ## Invalid Amount
