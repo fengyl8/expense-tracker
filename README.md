@@ -52,13 +52,18 @@ http://localhost:8080
 
 ### Endpoints
 
-- `GET /api/health` — check that the application is running
-- `GET /api/hello?name=Fengyuan` — return a greeting
-- `POST /api/expenses` — create an expense
-- `GET /api/expenses` — list all expenses
-- `GET /api/expenses/{id}` — get an expense by ID
-- `PUT /api/expenses/{id}` — update an expense
-- `DELETE /api/expenses/{id}` — delete an expense
+| Method | Path | Description | Success status |
+| --- | --- | --- | --- |
+| GET | `/api/health` | Check application health | 200 |
+| GET | `/api/hello?name=Fengyuan` | Return a greeting | 200 |
+| POST | `/api/expenses` | Create an expense | 201 |
+| GET | `/api/expenses` | List all expenses | 200 |
+| GET | `/api/expenses/{id}` | Get an expense by ID | 200 |
+| PUT | `/api/expenses/{id}` | Update an expense | 200 |
+| DELETE | `/api/expenses/{id}` | Delete an expense | 204 |
+
+GET, PUT, and DELETE requests for a non-existent expense ID return
+404 with `{ "error": "Expense not found with id: <id>" }`.
 
 ### Example Create Request
 
