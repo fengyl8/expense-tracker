@@ -65,10 +65,23 @@ http://localhost:8080
 GET, PUT, and DELETE requests for a non-existent expense ID return
 404 with `{ "error": "Expense not found with id: <id>" }`.
 
-The list endpoint supports an optional `category` query parameter,
-for example `/api/expenses?category=Food`.
-Category matching is exact and case-sensitive.
-Omitting the parameter returns all expenses; no matches returns HTTP 200 with `[]`.
+### Filter Expenses
+
+The list endpoint accepts optional `category`, `from`, and `to` query parameters.
+Category matching is exact and case-sensitive. Dates use `YYYY-MM-DD` format,
+and the range includes both start and end dates. Providing only `from` applies
+a lower bound; providing only `to` applies an upper bound.
+Omitting all parameters returns all expenses; no matches returns HTTP 200 with `[]`.
+Expenses without a date are excluded when a date filter is provided.
+Invalid dates or a `from` date later than `to` return HTTP 400 with `{ "error": "..." }`.
+
+```http
+GET http://localhost:8080/api/expenses?category=Food
+GET http://localhost:8080/api/expenses?from=2026-08-01&to=2026-08-31
+GET http://localhost:8080/api/expenses?category=Food&from=2026-08-01&to=2026-08-31
+GET http://localhost:8080/api/expenses?category=DoesNotExist
+GET http://localhost:8080/api/expenses?from=not-a-date&to=2026-08-31
+```
 
 ### Example Create Request
 

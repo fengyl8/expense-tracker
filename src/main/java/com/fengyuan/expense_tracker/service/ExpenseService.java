@@ -5,6 +5,7 @@ import com.fengyuan.expense_tracker.model.Expense;
 import com.fengyuan.expense_tracker.repository.ExpenseRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -22,15 +23,19 @@ public class ExpenseService {
         return expenseRepository.save(expense);
     }
 
-    public List<Expense> getAllExpenses(String category) {
-        List<Expense> expenses = expenseRepository.findAll();
-
-        if (category == null) {
-            return expenses;
+    public List<Expense> getAllExpenses(String category, LocalDate from, LocalDate to) {
+        if (from != null && to != null && from.isAfter(to)) {
+            throw new IllegalArgumentException("from must be on or before to");
         }
 
+        List<Expense> expenses = expenseRepository.findAll();
+
         return expenses.stream()
-                .filter(expense -> category.equals(expense.getCategory()))
+                .filter(expense -> category == null || category.equals(expense.getCategory()))
+                .filter(expense -> from == null || (expense.getDate() != null
+                        && !expense.getDate().isBefore(from)))
+                .filter(expense -> to == null || (expense.getDate() != null
+                        && !expense.getDate().isAfter(to)))
                 .toList();
     }
 

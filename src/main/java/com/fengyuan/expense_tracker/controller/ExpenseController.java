@@ -2,6 +2,7 @@ package com.fengyuan.expense_tracker.controller;
 
 import com.fengyuan.expense_tracker.model.Expense;
 import com.fengyuan.expense_tracker.service.ExpenseService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -39,9 +41,13 @@ public class ExpenseController {
 
     @GetMapping
     public List<Expense> getAllExpenses(
-            @RequestParam(required = false) String category
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to
     ) {
-        return expenseService.getAllExpenses(category);
+        return expenseService.getAllExpenses(category, from, to);
     }
 
     @GetMapping("/{id}")
