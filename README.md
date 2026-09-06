@@ -65,6 +65,11 @@ http://localhost:8080
 GET, PUT, and DELETE requests for a non-existent expense ID return
 404 with `{ "error": "Expense not found with id: <id>" }`.
 
+The list endpoint supports an optional `category` query parameter,
+for example `/api/expenses?category=Food`.
+Category matching is exact and case-sensitive.
+Omitting the parameter returns all expenses; no matches returns HTTP 200 with `[]`.
+
 ### Example Create Request
 
 ```http

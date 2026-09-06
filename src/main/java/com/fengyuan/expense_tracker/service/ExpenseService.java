@@ -22,8 +22,16 @@ public class ExpenseService {
         return expenseRepository.save(expense);
     }
 
-    public List<Expense> getAllExpenses() {
-        return expenseRepository.findAll();
+    public List<Expense> getAllExpenses(String category) {
+        List<Expense> expenses = expenseRepository.findAll();
+
+        if (category == null) {
+            return expenses;
+        }
+
+        return expenses.stream()
+                .filter(expense -> category.equals(expense.getCategory()))
+                .toList();
     }
 
     public Expense getExpenseById(Long id) {
