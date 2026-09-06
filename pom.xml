@@ -11,8 +11,8 @@
 	<groupId>com.fengyuan</groupId>
 	<artifactId>expense-tracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+	<name>Expense Tracker</name>
+	<description>Expense tracking REST API built with Spring Boot, Spring Data JPA, and file-based H2.</description>
 	<url/>
 	<licenses>
 		<license/>
