@@ -16,9 +16,15 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleTypeMismatch(
             MethodArgumentTypeMismatchException exception
     ) {
-        String message = "id".equals(exception.getName())
-                ? "id must be a number"
-                : "Invalid value for parameter: " + exception.getName();
+        String parameter = exception.getName();
+        String message;
+        if ("id".equals(parameter)) {
+            message = "id must be a number";
+        } else if ("from".equals(parameter) || "to".equals(parameter)) {
+            message = parameter + " must be a valid date in YYYY-MM-DD format";
+        } else {
+            message = "Invalid value for parameter: " + parameter;
+        }
 
         Map<String, String> response = Map.of("error", message);
 
