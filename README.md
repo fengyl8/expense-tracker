@@ -2,27 +2,19 @@
 
 My name is Fengyuan Liu.
 
-This is an internship portfolio project for learning software engineering and building an expense tracking application.
+Expense Tracker is an internship portfolio project built as a REST API. It supports creating, listing, updating, and deleting expenses, with optional category and date-range filters. Expenses are stored in a file-based H2 database and persist across application restarts when run from the same project directory.
 
 ## Technology Stack
 
-- Java
+- Java 21
 - Spring Boot
-- SQL
-
-## Week 1
-
-During Week 1, I set up my Java development environment, reviewed Spring Boot concepts, and created a plain Java expense program.
-
-## How to Run the Week 1 Program
-
-From the project root, compile the program with `javac -d out src/Expense.java src/Main.java`.
-Then run it with `java -cp out Main`.
-Alternatively, open the project in IntelliJ IDEA and run `Main.java`.
+- Spring Data JPA
+- H2 SQL database (file-based)
+- Maven Wrapper
 
 ## Spring Boot Expense API
 
-Week 2 introduced the create and list endpoints. Week 3 adds full CRUD operations and stores expenses in a file-based H2 database, so data remains after the application restarts.
+Week 2 introduced the create and list endpoints. Week 3 added full CRUD and persistent storage. Week 4 adds category and date-range filtering on the existing list endpoint.
 
 ### Requirements
 
@@ -97,5 +89,22 @@ Content-Type: application/json
 }
 ```
 
-More request and response examples are available in [`docs/api-examples.md`](docs/api-examples.md).
-The application request flow is explained in [`docs/request-flow.md`](docs/request-flow.md).
+## Documentation
+
+- [API examples](docs/api-examples.md): example requests and responses.
+- [Architecture](docs/architecture.md): modules, request flow, database schema, and the filtering tradeoff.
+- [Request flow](docs/request-flow.md): how requests pass through the application layers.
+- [Tutorial notes](docs/tutorial-notes.md): learning notes.
+
+## Week 1 Program
+
+During Week 1, I set up my Java development environment, reviewed Spring Boot concepts, and created a plain Java expense program.
+
+From the project root, compile and run the program:
+
+```text
+javac -d out src/Expense.java src/Main.java
+java -cp out Main
+```
+
+Alternatively, open the project in IntelliJ IDEA and run `Main.java`.
