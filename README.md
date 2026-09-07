@@ -89,6 +89,26 @@ Content-Type: application/json
 }
 ```
 
+## Automated Tests
+
+Run the service unit tests from the project root on Windows:
+
+```powershell
+.\mvnw.cmd test
+```
+
+On Unix or macOS:
+
+```bash
+./mvnw test
+```
+
+`ExpenseServiceTest` uses JUnit and a Mockito repository mock. It covers optional
+filters, case-sensitive categories, inclusive date boundaries, combined filters,
+empty results, undated expenses, and reversed date ranges. These tests do not
+start the application or connect to H2. HTTP status codes and date-string parsing
+are outside the scope of these service unit tests.
+
 ## Documentation
 
 - [API examples](docs/api-examples.md): example requests and responses.
